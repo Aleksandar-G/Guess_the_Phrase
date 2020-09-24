@@ -3,7 +3,7 @@ let currentPhases = [];
 let bestPhases = [];
 let phaseFound = false;
 let populationCount = 200;
-let mutationrate = 5;
+let mutationrate = 3;
 
 function StartUp(){
     //let thePhase = document.getElementById("phase");
@@ -28,7 +28,7 @@ function CheckForPhase(){
 }
 
 function TakeBestPhases(){
-    let numOfPhasesToTake = 5;
+    let numOfPhasesToTake = 50;
     bestPhases = [];
 
    currentPhases= currentPhases.sort(comparePhases);
@@ -42,21 +42,22 @@ function TakeBestPhases(){
         
     }
 
-    console.log(bestPhases);
+    console.log(bestPhases[0].string);
 
     this.GenerateNextGeneration(bestPhases);
 
 }
 
 function GenerateNextGeneration(parents){
-    //debugger;
+
+    parents = this.MakeApool(parents);
     currentPhases = [];
     
     for (let i = 0; i < populationCount; i++) {
         let parentA = parents[this.GetRandomNum(parents.length)];
         let parentB = parents[this.GetRandomNum(parents.length)];
 
-       // let midpoint = this.GetRandomNum(parents.length);
+       // let midpoint = this.GetRandomNum(parents.length); 
 
         let newPhase = parentA.crossover(parentB);
 
@@ -77,7 +78,7 @@ function Continue(){
         PrintBestPhases();
     }
 
-    alert("Youwin");
+    alert("The phased is found");
     console.log(i);
 }
 
@@ -99,6 +100,21 @@ function comparePhases(phase1,phase2){
 
     return 0;
     
+}
+
+function MakeApool(pool){
+    //debugger;
+    let newpool = [];
+
+    for (let i = 0; i < pool.length; i++) {
+        let element = pool[i];
+        for (let j = 0; j <Math.floor(pool[i].fitness); j++) {
+            newpool.push(element);   
+        }
+        
+    }
+
+    return newpool;
 }
 
 function GetRandomNum(max){

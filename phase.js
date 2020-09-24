@@ -73,7 +73,7 @@ class Phase{
         //if(GetRandomNum(100) > mutationrate){}
         for (let i = 0; i < this.string.length; i++) {
             
-            if(GetRandomNum(100) > mutationrate){
+            if(GetRandomNum(100) < mutationrate){
                 //this.string[i] = this.randomChar();
                 let charToBeReplaced = this.string[i];
                 let newString = this.string.replace(charToBeReplaced,this.randomChar());
