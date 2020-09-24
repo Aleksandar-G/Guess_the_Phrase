@@ -1,5 +1,10 @@
 
-window.onload = (event) => {
+/*window.onload = (event) => {
+    
+  };*/
+
+  document.getElementById("startBtn").onclick = (event) => {
+
     let p1 = document.getElementById("p1");
 
     let phases = StartUp();
@@ -10,8 +15,4 @@ window.onload = (event) => {
          para.appendChild(node);
          p1.appendChild(para);
     });
-  };
-
-  document.getElementById("startBtn").onclick = (event) => {
-    GetUserPhase();
   }
