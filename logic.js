@@ -1,8 +1,9 @@
 let thePhase = "";
 let currentPhases = [];
+let bestPhases = [];
 let phaseFound = false;
-let populationCount = 10;
-let mutationrate = 10;
+let populationCount = 200;
+let mutationrate = 5;
 
 function StartUp(){
     //let thePhase = document.getElementById("phase");
@@ -16,8 +17,9 @@ function StartUp(){
 }
 
 function CheckForPhase(){
+    //debugger;
     currentPhases.forEach(element => {
-        if (element.string == thePhase) {
+        if (element.string === thePhase) {
             phaseFound = true;
         }
     });
@@ -27,9 +29,11 @@ function CheckForPhase(){
 
 function TakeBestPhases(){
     let numOfPhasesToTake = 5;
-    let bestPhases = [];
+    bestPhases = [];
 
    currentPhases= currentPhases.sort(comparePhases);
+
+   //console.log(currentPhases);
 
     //console.log(currentPhases);
     for (let i = 0; i < numOfPhasesToTake; i++) {
@@ -45,8 +49,8 @@ function TakeBestPhases(){
 }
 
 function GenerateNextGeneration(parents){
-
-    currentPhase = [];
+    //debugger;
+    currentPhases = [];
     
     for (let i = 0; i < populationCount; i++) {
         let parentA = parents[this.GetRandomNum(parents.length)];
@@ -58,18 +62,23 @@ function GenerateNextGeneration(parents){
 
         currentPhases.push(newPhase);
 
-        console.log("q stana");
+        //console.log("q stana");
     }
 }
 
 function Continue(){
     let i = 0;
-    while (i < 3) {
+    while (phaseFound != true) {
         this.CheckForPhase();
         this.TakeBestPhases();
         //this.GenerateNextGeneration();
         i++;
+        //debugger;
+        PrintBestPhases();
     }
+
+    alert("Youwin");
+    console.log(i);
 }
 
 function GetUserPhase(){

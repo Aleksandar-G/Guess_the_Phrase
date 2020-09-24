@@ -5,7 +5,7 @@
 
   document.getElementById("startBtn").onclick = (event) => {
 
-    let p1 = document.getElementById("p1");
+    /*let p1 = document.getElementById("p1");
 
     let phases = StartUp();
     
@@ -14,5 +14,14 @@
         let node = document.createTextNode(element.string);
          para.appendChild(node);
          p1.appendChild(para);
-    });
+    });*/
+    document.getElementById("p1").innerHTML = "asdasdasdasd";
+    let phases = StartUp();
+
+
   }
+
+function PrintBestPhases(){
+  document.getElementById("p1").innerHTML = bestPhases[0].string;
+
+}

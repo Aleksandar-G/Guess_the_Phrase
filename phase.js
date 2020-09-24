@@ -29,7 +29,7 @@ class Phase{
         
         //charactersLength = Math.floor((Math.random() * 100) + 1);
         //console.log(result);
-        return newChar;
+        return newChar.toString();
     }
     //calculates the fitness of the phase
     calcFitness(){
@@ -71,12 +71,13 @@ class Phase{
 
     mutate(){
         //if(GetRandomNum(100) > mutationrate){}
-        //debugger;
         for (let i = 0; i < this.string.length; i++) {
             
             if(GetRandomNum(100) > mutationrate){
                 //this.string[i] = this.randomChar();
-                this.string[i].replace(this.randomChar());
+                let charToBeReplaced = this.string[i];
+                let newString = this.string.replace(charToBeReplaced,this.randomChar());
+                this.string = newString;
             }
         }
     }
