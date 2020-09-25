@@ -1,122 +1,116 @@
-let thePhase = "";
-let currentPhases = [];
-let bestPhases = [];
-let phaseFound = false;
+let thePhrase = "";
+let currentPhrases = [];
+let bestPhrases = [];
+let phraseFound = false;
 let populationCount = 200;
 let mutationrate = 3;
 
-function StartUp(){
-    //let thePhase = document.getElementById("phase");
-    this.GetUserPhase();
-    for(let i = 0; i < 200 ; i++){
-        phase = new Phase();
-        currentPhases.push(phase);
+function StartUp() {
+
+    this.GetUserPhrase();
+    for (let i = 0; i < 200; i++) {
+        phrase = new Phrase();
+        currentPhrases.push(phrase);
     }
+    this.CheckForPhrase();
 
     Continue();
 }
 
-function CheckForPhase(){
-    //debugger;
-    currentPhases.forEach(element => {
-        if (element.string === thePhase) {
-            phaseFound = true;
+function CheckForPhrase() {
+
+    currentPhrases.forEach(element => {
+        if (element.string === thePhrase) {
+            phraseFound = true;
         }
     });
 
-    //this.GenerateNextGeneration();
 }
 
-function TakeBestPhases(){
-    let numOfPhasesToTake = 50;
-    bestPhases = [];
+function TakeBestPhrases() {
+    let numOfPhrasesToTake = 50;
+    bestPhrases = [];
 
-   currentPhases= currentPhases.sort(comparePhases);
+    currentPhrases = currentPhrases.sort(comparePhrases);
 
-   //console.log(currentPhases);
+    for (let i = 0; i < numOfPhrasesToTake; i++) {
 
-    //console.log(currentPhases);
-    for (let i = 0; i < numOfPhasesToTake; i++) {
+        bestPhrases.push(currentPhrases[i]);
 
-        bestPhases.push(currentPhases[i]);
-        
     }
 
-    console.log(bestPhases[0].string);
-
-    this.GenerateNextGeneration(bestPhases);
-
 }
 
-function GenerateNextGeneration(parents){
+function GenerateNextGeneration(parents) {
 
     parents = this.MakeApool(parents);
-    currentPhases = [];
-    
+    currentPhrases = [];
+
     for (let i = 0; i < populationCount; i++) {
         let parentA = parents[this.GetRandomNum(parents.length)];
         let parentB = parents[this.GetRandomNum(parents.length)];
 
-       // let midpoint = this.GetRandomNum(parents.length); 
+        let newPhrase = parentA.crossover(parentB);
 
-        let newPhase = parentA.crossover(parentB);
+        currentPhrases.push(newPhrase);
 
-        currentPhases.push(newPhase);
-
-        //console.log("q stana");
     }
+
+    console.log(bestPhrases[0]);
 }
 
-function Continue(){
+async function Continue() {
     let i = 0;
-    while (phaseFound != true) {
-        this.CheckForPhase();
-        this.TakeBestPhases();
-        //this.GenerateNextGeneration();
-        i++;
-        //debugger;
-        PrintBestPhases();
-    }
+    while (phraseFound != true) {
 
-    alert("The phased is found");
+        this.TakeBestPhrases();
+        this.GenerateNextGeneration(bestPhrases);
+        this.CheckForPhrase();
+        i++;
+        await PrintBestPhrases();
+    }
+    this.TakeBestPhrases();
+    await PrintBestPhrases();
+
+    alert("The phrase is found");
     console.log(i);
 }
 
-function GetUserPhase(){
+function GetUserPhrase() {
     //debugger;
-    thePhase = document.getElementById("phase").parentElement.children[1].value;
-    console.log(thePhase);
-    return thePhase;
+    //thePhrase = document.getElementById("p1").parentElement.children[1].value;
+    thePhrase = document.getElementById("UserPhraseDiv").children[1].value;
+    console.log(thePhrase);
+    return thePhrase;
 }
 
-function comparePhases(phase1,phase2){
-    if (phase1.calcFitness() > phase2.calcFitness()) {
+function comparePhrases(phrase1, phrase2) {
+    if (phrase1.calcFitness() > phrase2.calcFitness()) {
         return -1;
     }
 
-    if (phase1.calcFitness() < phase2.calcFitness()) {
+    if (phrase1.calcFitness() < phrase2.calcFitness()) {
         return 1;
     }
 
     return 0;
-    
+
 }
 
-function MakeApool(pool){
-    //debugger;
+function MakeApool(pool) {
+
     let newpool = [];
 
     for (let i = 0; i < pool.length; i++) {
         let element = pool[i];
-        for (let j = 0; j <Math.floor(pool[i].fitness); j++) {
-            newpool.push(element);   
+        for (let j = 0; j < Math.floor(pool[i].fitness); j++) {
+            newpool.push(element);
         }
-        
     }
 
     return newpool;
 }
 
-function GetRandomNum(max){
-  return  Math.floor(Math.random() * Math.floor(max));
+function GetRandomNum(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }
