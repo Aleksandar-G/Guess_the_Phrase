@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="logic.js"></script>
     <script src="phrase.js"></script>
     <meta charset="UTF-8">
@@ -12,9 +13,17 @@
 <div id="UserPhraseDiv">
     <label for="fname">Phrase:</label>
   <input type="text" id="phrase" name="Phrase"><br><br>
-  <button id="startBtn">Start</button>
+  <button class="btn btn-outline-primary" id="startBtn">Start</button>
   </div>
-    <p id="p1"> h</p>
+    <p id="p1"> Best Phrase:</p>
+    <p id="p2"> Current Generation:</p>
+
+    <div class="input-group mb-1">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">@</span>
+  </div>
+  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+</div>
 
     <script src="visual.js"></script>
 </body>

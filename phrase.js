@@ -6,7 +6,6 @@ class Phrase {
 
     //geenrates the a new phrase
     GenerateRandomPhrase() {
-        //debugger;
         let result = '';
         let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ';
         let charactersLength = thePhrase.length;
@@ -14,7 +13,6 @@ class Phrase {
 
             result += characters.charAt(Math.floor(Math.random() * characters.length));
         }
-
         return result;
     }
 
@@ -59,7 +57,6 @@ class Phrase {
         child.mutate();
 
         return child;
-
     }
 
     mutate() {
@@ -71,7 +68,6 @@ class Phrase {
                 let charToBeReplaced = this.string[i];
                 let newString = this.string.replace(charToBeReplaced, this.randomChar());
                 this.string = newString;
-
             }
         }
     }

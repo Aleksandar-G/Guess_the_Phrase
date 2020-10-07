@@ -1,11 +1,18 @@
 let thePhrase = "";
+let bestPhraseNotChangedCount = 0;
 let currentPhrases = [];
 let bestPhrases = [];
 let phraseFound = false;
 let populationCount = 200;
-let mutationrate = 3;
+let mutationrate = 2;
+let generationNum = 0;
+let lastBestPhrase = "";
 
 function StartUp() {
+
+    currentPhrases = [];
+    phraseFound = false;
+    generationNum = 0;
 
     this.GetUserPhrase();
     for (let i = 0; i < 200; i++) {
@@ -29,6 +36,11 @@ function CheckForPhrase() {
 
 function TakeBestPhrases() {
     let numOfPhrasesToTake = 50;
+
+    if (generationNum > 0) {
+        lastBestPhrase = bestPhrases[0].string;
+    }
+    
     bestPhrases = [];
 
     currentPhrases = currentPhrases.sort(comparePhrases);
@@ -38,6 +50,28 @@ function TakeBestPhrases() {
         bestPhrases.push(currentPhrases[i]);
 
     }
+
+    if (lastBestPhrase == bestPhrases[0].string) {
+
+        bestPhraseNotChangedCount++;
+        if (bestPhraseNotChangedCount > 25) {
+            if (mutationrate < 64) {
+
+                mutationrate *=2;
+            }
+            else{
+
+                mutationrate = 90;
+                alert("stana 95");
+                console.log("stana 95");
+            }
+        }
+    }
+    else{
+        bestPhraseNotChangedCount = 0;
+        mutationrate = 2;   
+    }
+    console.log(bestPhraseNotChangedCount);
 
 }
 
@@ -60,25 +94,24 @@ function GenerateNextGeneration(parents) {
 }
 
 async function Continue() {
-    let i = 0;
+    
     while (phraseFound != true) {
 
         this.TakeBestPhrases();
         this.GenerateNextGeneration(bestPhrases);
         this.CheckForPhrase();
-        i++;
+        generationNum++;
         await PrintBestPhrases();
     }
     this.TakeBestPhrases();
     await PrintBestPhrases();
 
-    alert("The phrase is found");
-    console.log(i);
+    //alert("The phrase is found");
+    console.log(generationNum);
 }
 
 function GetUserPhrase() {
-    //debugger;
-    //thePhrase = document.getElementById("p1").parentElement.children[1].value;
+
     thePhrase = document.getElementById("UserPhraseDiv").children[1].value;
     console.log(thePhrase);
     return thePhrase;
