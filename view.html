@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles.css">
     <script src="logic.js"></script>
     <script src="phrase.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML</title>
-</head>
-<body>
-<div id="UserPhraseDiv">
-    <label for="fname">Phrase:</label>
-  <input type="text" id="phrase" name="Phrase"><br><br>
-  <button class="btn btn-outline-primary" id="startBtn">Start</button>
-  </div>
-    <p id="p1"> Best Phrase:</p>
-    <p id="p2"> Current Generation:</p>
-
-    <div class="input-group mb-1">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">@</span>
-  </div>
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-</div>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Phrase</title>
+  </head>
+  <body>
+    <div class="mx-auto mt-3 w300" id="UserPhraseDiv">
+      <label for="fname">Phrase:</label>
+      <input class="w300" type="text" id="phrase" name="Phrase" />
+      <button class="btn btn-outline-primary my-3 w300" id="startBtn">Start</button>
+    </div>
+    <div class="mx-auto w300" id="statictics">
+      <p id="p1">Best Phrase:</p>
+      <p id="p2">Current Generation:</p>
+    </div>
 
     <script src="visual.js"></script>
-</body>
+  </body>
 </html>
